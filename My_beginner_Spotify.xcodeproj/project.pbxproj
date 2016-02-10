@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		816B83021C6AF6DB0024AB1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B83011C6AF6DB0024AB1C /* AppDelegate.swift */; };
-		816B83041C6AF6DB0024AB1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B83031C6AF6DB0024AB1C /* ViewController.swift */; };
 		816B83071C6AF6DB0024AB1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 816B83051C6AF6DB0024AB1C /* Main.storyboard */; };
 		816B830A1C6AF6DB0024AB1C /* My_beginner_Spotify.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 816B83081C6AF6DB0024AB1C /* My_beginner_Spotify.xcdatamodeld */; };
 		816B830C1C6AF6DB0024AB1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 816B830B1C6AF6DB0024AB1C /* Assets.xcassets */; };
 		816B830F1C6AF6DB0024AB1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 816B830D1C6AF6DB0024AB1C /* LaunchScreen.storyboard */; };
+		816B83171C6AFA2F0024AB1C /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B83161C6AFA2F0024AB1C /* MainTableViewController.swift */; };
+		816B83191C6AFABD0024AB1C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B83181C6AFABD0024AB1C /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		816B82FE1C6AF6DB0024AB1C /* My_beginner_Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = My_beginner_Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		816B83011C6AF6DB0024AB1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		816B83031C6AF6DB0024AB1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		816B83061C6AF6DB0024AB1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		816B83091C6AF6DB0024AB1C /* My_beginner_Spotify.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = My_beginner_Spotify.xcdatamodel; sourceTree = "<group>"; };
 		816B830B1C6AF6DB0024AB1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		816B830E1C6AF6DB0024AB1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		816B83101C6AF6DB0024AB1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		816B83161C6AFA2F0024AB1C /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewController.swift; path = My_beginner_Spotify/MainTableViewController.swift; sourceTree = "<group>"; };
+		816B83181C6AFABD0024AB1C /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsViewController.swift; path = My_beginner_Spotify/DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,8 @@
 		816B82F51C6AF6DB0024AB1C = {
 			isa = PBXGroup;
 			children = (
+				816B83161C6AFA2F0024AB1C /* MainTableViewController.swift */,
+				816B83181C6AFABD0024AB1C /* DetailsViewController.swift */,
 				816B83001C6AF6DB0024AB1C /* My_beginner_Spotify */,
 				816B82FF1C6AF6DB0024AB1C /* Products */,
 			);
@@ -57,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				816B83011C6AF6DB0024AB1C /* AppDelegate.swift */,
-				816B83031C6AF6DB0024AB1C /* ViewController.swift */,
 				816B83051C6AF6DB0024AB1C /* Main.storyboard */,
 				816B830B1C6AF6DB0024AB1C /* Assets.xcassets */,
 				816B830D1C6AF6DB0024AB1C /* LaunchScreen.storyboard */,
@@ -140,8 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				816B830A1C6AF6DB0024AB1C /* My_beginner_Spotify.xcdatamodeld in Sources */,
-				816B83041C6AF6DB0024AB1C /* ViewController.swift in Sources */,
+				816B83171C6AFA2F0024AB1C /* MainTableViewController.swift in Sources */,
 				816B83021C6AF6DB0024AB1C /* AppDelegate.swift in Sources */,
+				816B83191C6AFABD0024AB1C /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
