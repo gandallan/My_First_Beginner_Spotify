@@ -7,27 +7,34 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class MainTableViewController: UITableViewController {
     
     
-    var canciones = []
+    
+//*****************Variables
+    var listaCanciones : Array<Array<String>> = Array<Array<String>>()
+    var cancionSeleccionada: Int = 0
+    var portadaIndice:NSData!
 
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        listaCanciones.append(["Banjo Short",           "AudioNautix",  "image1", "sound1"])
+        listaCanciones.append(["Baroque Coffee House",  "Doug Maxwell", "image2", "sound2"])
+        listaCanciones.append(["Leslie's Struct",       "Jhon Deley",   "image3", "sound3"])
+        listaCanciones.append(["Far Away",              "MK2",          "image4", "sound4"])
+        listaCanciones.append(["Cartoon Bank",          "Doug Maxwell", "image5", "sound5"])
+        listaCanciones.append(["Timed Out",             "Jingle Punk",  "image6", "sound6"])
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -37,62 +44,71 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return listaCanciones.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell
+        
+        
+        cell.textLabel?.text = self.listaCanciones[indexPath.row][0]
+        
+        let imgUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(listaCanciones[indexPath.row][2], ofType: "jpg")!)
+        let imgData = NSData(contentsOfURL: imgUrl)
+        
+        cell.imageView?.image = UIImage(data: imgData!)
+        
+        
 
-        // Configure the cell...
 
         return cell
     }
-    */
+    
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+
+    
+    func tableView(tableView: UITableView, didSelecRowAtIndexPath indexPath: NSIndexPath){
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        
+        cancionSeleccionada = indexPath.row
+        
+        
+        self.performSegueWithIdentifier("details", sender: cancionSeleccionada)
+        
+    
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
+        let DetailsView: DetailsViewController = segue.destinationViewController as! DetailsViewController
+        
+        let indexPath = self.tableView.indexPathForSelectedRow
+        
+        let random = arc4random_uniform(6)
+        let randoUnit = Int(random)
+        
+        DetailsView.tituloCancion = self.listaCanciones[indexPath!.row][0]
+        DetailsView.autorCancion = self.listaCanciones[indexPath!.row][1]
+        DetailsView.nombreportada = self.listaCanciones[indexPath!.row][2]
+        DetailsView.audioCancion = self.listaCanciones[indexPath!.row][3]
+        DetailsView.shuffleCancion = self.listaCanciones[randoUnit][3]
+        
+        
+
     }
-    */
+
+
+
+
+
+    
 
 }
