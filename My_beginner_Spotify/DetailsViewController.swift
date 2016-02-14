@@ -8,21 +8,25 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     
-    
-    
-    
 //************Variables
-    var Main: MainTableViewController = MainTableViewController()
+    
+    //variables para la playlist
     var tituloCancion:String?
     var autorCancion: String?
     var nombreportada: String?
     var audioCancion: String?
-    var shuffleCancion: String?
     
-
+    //variables para el shuffle
+    let listaTitulos: [String] = ["Bajo Short","Baroque Coffee House","Leslie's Struct","Far Away","Cartoon Bank","TimedOut"]
+    let listaAutores: [String] = ["AudioNautix","Doug Maxwell","Jhon Deley","MK2","Doug Maxwell","Jingle Punk"]
+    let listaPortadas: [String] = ["image1","image2","image3","image4","image5","image6",]
+    let listaCanciones: [String] =  ["sound1", "sound2", "sound3", "sound4", "sound5", "sound6"]
+    
+    //Declaración de AVAudioPlayer
     var reproductor = AVAudioPlayer()
     var shuffle = AVAudioPlayer()
 
@@ -31,31 +35,35 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     @IBOutlet weak var autor: UILabel!
     @IBOutlet weak var portada: UIImageView!
     
-
     
     
 
-    
+//************ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-
+        //Volumen
+        let wrapperView = UIView(frame: CGRectMake(45, 510, 230, 20))
+        self.view.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(wrapperView)
         
+        let volumenView = MPVolumeView(frame: wrapperView.bounds)
+        wrapperView.addSubview(volumenView)
+        
+        
+        //Asignacion de titulo y autor seleccionados de la playlista
         titulo.text = tituloCancion
         autor.text = autorCancion
         
-        // url de portada, audios y audios shuffle seleccionados
+        // url de portada, audio seleccionados de la playlist
         let imgUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(nombreportada, ofType: "jpg")!)
-        let imgData = NSData(contentsOfURL: imgUrl)
-        let shuffleUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(shuffleCancion, ofType: "mp3")!)
+        let imgData = NSData(contentsOfURL: imgUrl) //convrtiendo en data la imagen
         
         let cancionDir = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(audioCancion, ofType: "mp3")!)
         
         
         do{
             
-            try shuffle = AVAudioPlayer(contentsOfURL: shuffleUrl)
             
             try reproductor = AVAudioPlayer(contentsOfURL: cancionDir)
             reproductor.play()
@@ -66,10 +74,10 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
         }catch{
             
         }
-        
 
     }
 
+//***********Botones de reproducción
     @IBAction func reproducirMusica(sender: UIButton) {
         
         let botones:String = (sender.titleLabel?.text)!
@@ -90,7 +98,11 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 if reproductor.playing{
                     
                     reproductor.pause()
-                }
+                    
+                }else if shuffle.playing{
+                    
+                    shuffle.pause()
+            }
             
             case "stop":
                 
@@ -104,33 +116,43 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     shuffle.currentTime = 0.0
                 }
             
-            case "shuffle":
+            default: //este es shuffle
                 
+                
+                let random: Int = Int (arc4random_uniform(6))//random
+                
+                // url de audio y portada random
+                let shuffleAudioUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(listaCanciones[random], ofType: "mp3")!)
+                let shuffleImgUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(listaPortadas[random], ofType: "jpg")!)
+                let shufflaImgData = NSData(contentsOfURL: shuffleImgUrl)
+                
+                do{
+                    //si se presiona shuffle tanto play como shuffle obtienen el mismo valor del random
+                    try shuffle = AVAudioPlayer(contentsOfURL: shuffleAudioUrl)
+                    try reproductor = AVAudioPlayer(contentsOfURL: shuffleAudioUrl)
+                    
+                    portada.image = UIImage(data: shufflaImgData!)
+                    
+                    //obtienen el mismo valor del random
+                    titulo.text = listaTitulos[random]
+                    autor.text = listaAutores[random]
+                    
+                }catch{
+                    
+                }
  
                 if !shuffle.playing{
-
+                    
                     reproductor.stop()
                     reproductor.currentTime = 0.0
                     
                     shuffle.play()
-                    print(shuffle)
-                    
-                    
-                    
-                    
-                    
-                    
                     
                 }
-
-            default:
-                print("")
+            
         }
         
     }
-    
-
-    
     
 
 }

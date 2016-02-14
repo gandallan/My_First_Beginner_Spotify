@@ -18,9 +18,8 @@ class MainTableViewController: UITableViewController {
     var listaCanciones : Array<Array<String>> = Array<Array<String>>()
     var cancionSeleccionada: Int = 0
     var portadaIndice:NSData!
-
-
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +30,8 @@ class MainTableViewController: UITableViewController {
         listaCanciones.append(["Far Away",              "MK2",          "image4", "sound4"])
         listaCanciones.append(["Cartoon Bank",          "Doug Maxwell", "image5", "sound5"])
         listaCanciones.append(["Timed Out",             "Jingle Punk",  "image6", "sound6"])
+        
+        
         
     }
 
@@ -71,11 +72,10 @@ class MainTableViewController: UITableViewController {
     
     func tableView(tableView: UITableView, didSelecRowAtIndexPath indexPath: NSIndexPath){
         
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        
         cancionSeleccionada = indexPath.row
-        
         
         self.performSegueWithIdentifier("details", sender: cancionSeleccionada)
         
@@ -87,28 +87,19 @@ class MainTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
         let DetailsView: DetailsViewController = segue.destinationViewController as! DetailsViewController
         
         let indexPath = self.tableView.indexPathForSelectedRow
         
-        let random = arc4random_uniform(6)
-        let randoUnit = Int(random)
         
-        DetailsView.tituloCancion = self.listaCanciones[indexPath!.row][0]
-        DetailsView.autorCancion = self.listaCanciones[indexPath!.row][1]
-        DetailsView.nombreportada = self.listaCanciones[indexPath!.row][2]
-        DetailsView.audioCancion = self.listaCanciones[indexPath!.row][3]
-        DetailsView.shuffleCancion = self.listaCanciones[randoUnit][3]
-        
-        
+        DetailsView.tituloCancion = self.listaCanciones[indexPath!.row][0] //titulos
+        DetailsView.autorCancion = self.listaCanciones[indexPath!.row][1] //autores
+        DetailsView.nombreportada = self.listaCanciones[indexPath!.row][2] //portadas
+        DetailsView.audioCancion = self.listaCanciones[indexPath!.row][3] //audios
+                
+
 
     }
-
-
-
-
-
     
 
 }
