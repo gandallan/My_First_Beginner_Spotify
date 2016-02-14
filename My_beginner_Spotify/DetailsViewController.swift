@@ -110,10 +110,16 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     
                     reproductor.play()
                     
-                }else{}
-                if shuffle.playing{
+                    
+                }else if reproductor.playing{
+                    reproductor.stop()
+                    reproductor.currentTime = 0.0
+                    reproductor.play()
+                }else if shuffle.playing{
                     
                     shuffle.stop()
+                    reproductor.currentTime = 0.0
+                    shuffle.play()
                 }
             
             
@@ -126,7 +132,14 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 }else if shuffle.playing{
                     
                     shuffle.pause()
-            }
+                    
+                }else if !shuffle.playing || !reproductor.playing{
+                    
+                    reproductor.stop()
+                    reproductor.currentTime = 0.0
+                    shuffle.stop()
+                    shuffle.currentTime = 0.0
+                }
             
             case "stop":
                 
@@ -136,8 +149,10 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     reproductor.currentTime = 0.0
                 
                 }else if shuffle.playing{
+                    
                     shuffle.stop()
                     shuffle.currentTime = 0.0
+            
                 }
             
             default: //este es shuffle
@@ -164,7 +179,8 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 }catch{
                     
                 }
- 
+            
+                
                 if !shuffle.playing{
                     
                     reproductor.stop()
@@ -172,6 +188,10 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     
                     shuffle.play()
                     
+                }else{
+                    
+                    shuffle.stop()
+                    shuffle.currentTime = 0.0
                 }
             
         }
