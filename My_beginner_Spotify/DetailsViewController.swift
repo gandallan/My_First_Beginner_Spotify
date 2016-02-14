@@ -89,7 +89,10 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 if !reproductor.playing{
                     
                     reproductor.play()
+                }
+                if shuffle.playing{
                     
+                    shuffle.stop()
                 }
             
             
