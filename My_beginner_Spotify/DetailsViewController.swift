@@ -87,7 +87,11 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
         if reproductor.playing{
             
             reproductor.volume = selectedValue
-        }else if (reproductor.playing || shuffle.playing != false){
+        }else if (reproductor.playing && shuffle.playing != false){
+            
+            shuffle.volume = selectedValue
+            
+        }else if shuffle.playing{
             
             shuffle.volume = selectedValue
         }
@@ -111,17 +115,18 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     reproductor.play()
                     
                     
-                }else if reproductor.playing{
+                }else if reproductor.playing {
+                
                     reproductor.stop()
                     reproductor.currentTime = 0.0
                     reproductor.play()
-                }else if shuffle.playing{
                     
+                    }else{
+                    }
+                
+                while shuffle.playing{
                     shuffle.stop()
-                    reproductor.currentTime = 0.0
-                    shuffle.play()
                 }
-            
             
             case "pause":
                 
@@ -129,18 +134,28 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     
                     reproductor.pause()
                     
-                }else if shuffle.playing{
+                }else if !reproductor.playing{
+                    
+                    reproductor.pause()
+                    
+                    }else if !shuffle.playing || !reproductor.playing{
+                    
+                        reproductor.stop()
+                        reproductor.currentTime = 0.0
+                        shuffle.stop()
+                        shuffle.currentTime = 0.0
+                    }else{
+                    }
+                /*
+                if shuffle.playing{
                     
                     shuffle.pause()
                     
-                }else if !shuffle.playing || !reproductor.playing{
+                }else if !shuffle.playing{
                     
-                    reproductor.stop()
-                    reproductor.currentTime = 0.0
-                    shuffle.stop()
-                    shuffle.currentTime = 0.0
-                }
-            
+                        shuffle.pause()
+                    }
+                */
             case "stop":
                 
                 if reproductor.playing{
@@ -148,13 +163,21 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     reproductor.stop()
                     reproductor.currentTime = 0.0
                 
-                }else if shuffle.playing{
+                }else if !reproductor.playing{
+                    
+                    reproductor.stop()
+                    reproductor.currentTime = 0.0
+            
+                    }else{
+                    }
+               /*
+                if shuffle.playing{
                     
                     shuffle.stop()
                     shuffle.currentTime = 0.0
-            
+                    
                 }
-            
+                */
             default: //este es shuffle
                 
                 
@@ -182,17 +205,17 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
             
                 
                 if !shuffle.playing{
-                    
-                    reproductor.stop()
-                    reproductor.currentTime = 0.0
+
                     
                     shuffle.play()
                     
-                }else{
+                }else if shuffle.playing{
+                        shuffle.stop()
+                        shuffle.currentTime = 0.0
                     
-                    shuffle.stop()
-                    shuffle.currentTime = 0.0
-                }
+                    }else{
+                    }
+        
             
         }
         
