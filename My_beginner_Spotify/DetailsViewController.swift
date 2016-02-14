@@ -83,8 +83,17 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     @IBAction func sliderValueChanged(sender: UISlider) {
         
         let selectedValue = Float(sender.value)
-        reproductor.volume = selectedValue
-        shuffle.volume = selectedValue
+        
+        if reproductor.playing{
+            
+            reproductor.volume = selectedValue
+        }else if (reproductor.playing || shuffle.playing != false){
+            
+            shuffle.volume = selectedValue
+        }
+        
+        
+        
         
     }
     
