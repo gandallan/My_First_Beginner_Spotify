@@ -23,7 +23,9 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        alert(title: "Recomendación", message: "Prueba la aplicación en un dispositivo para poder utilizar el volumen")
+        
         listaCanciones.append(["Banjo Short",           "AudioNautix",  "image1", "sound1"])
         listaCanciones.append(["Baroque Coffee House",  "Doug Maxwell", "image2", "sound2"])
         listaCanciones.append(["Leslie's Struct",       "Jhon Deley",   "image3", "sound3"])
@@ -99,6 +101,20 @@ class MainTableViewController: UITableViewController {
                 
 
 
+    }
+    func alert(title title: String, message: String){
+        
+        let alerta = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let Ok = UIAlertAction(title: "Ok", style: .Default) {
+            (action: UIAlertAction) in
+            
+            //añadir acción
+            
+        }
+        alerta.addAction(Ok)
+        self.presentViewController(alerta, animated: true, completion: nil)
+        
     }
     
 
