@@ -119,6 +119,12 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4sx-Z4-fLp">
+                                <rect key="frame" x="38" y="503" width="244" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="jRi-VR-r4i" eventType="valueChanged" id="HU4-bP-2mE"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -128,6 +134,7 @@
                         <outlet property="autor" destination="L8I-Yv-BSl" id="PBS-Fj-X6c"/>
                         <outlet property="portada" destination="ifg-kV-oB6" id="5vo-7n-USj"/>
                         <outlet property="titulo" destination="tKy-QW-Kfu" id="kRV-bg-mxY"/>
+                        <outlet property="volumen" destination="4sx-Z4-fLp" id="zXB-Ae-NT7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqC-eg-TMO" userLabel="First Responder" sceneMemberID="firstResponder"/>

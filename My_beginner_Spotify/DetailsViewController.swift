@@ -35,6 +35,8 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     @IBOutlet weak var autor: UILabel!
     @IBOutlet weak var portada: UIImageView!
     
+    @IBOutlet weak var volumen: UISlider!
+    
     
     
 
@@ -42,14 +44,14 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Volumen
+        //Volumen del dispositivo
+        /*
         let wrapperView = UIView(frame: CGRectMake(45, 510, 230, 20))
         self.view.backgroundColor = UIColor.clearColor()
         self.view.addSubview(wrapperView)
-        
         let volumenView = MPVolumeView(frame: wrapperView.bounds)
         wrapperView.addSubview(volumenView)
-        
+        */
         
         //Asignacion de titulo y autor seleccionados de la playlista
         titulo.text = tituloCancion
@@ -77,6 +79,15 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
 
     }
 
+//**********Volumen con slider
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        
+        let selectedValue = Float(sender.value)
+        reproductor.volume = selectedValue
+        shuffle.volume = selectedValue
+        
+    }
+    
 //***********Botones de reproducción
     @IBAction func reproducirMusica(sender: UIButton) {
         
@@ -89,7 +100,8 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 if !reproductor.playing{
                     
                     reproductor.play()
-                }
+                    
+                }else{}
                 if shuffle.playing{
                     
                     shuffle.stop()
