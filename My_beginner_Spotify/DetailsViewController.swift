@@ -25,6 +25,7 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     let listaAutores: [String] = ["AudioNautix","Doug Maxwell","Jhon Deley","MK2","Doug Maxwell","Jingle Punk"]
     let listaPortadas: [String] = ["image1","image2","image3","image4","image5","image6",]
     let listaCanciones: [String] =  ["sound1", "sound2", "sound3", "sound4", "sound5", "sound6"]
+
     
     //Declaración de AVAudioPlayer
     var reproductor = AVAudioPlayer()
@@ -44,8 +45,8 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Volumen del dispositivo
-        /*
+        
+        /* //Volumen del dispositivo
         let wrapperView = UIView(frame: CGRectMake(45, 510, 230, 20))
         self.view.backgroundColor = UIColor.clearColor()
         self.view.addSubview(wrapperView)
@@ -96,9 +97,6 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
             shuffle.volume = selectedValue
         }
         
-        
-        
-        
     }
     
 //***********Botones de reproducción
@@ -121,13 +119,16 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     reproductor.currentTime = 0.0
                     reproductor.play()
                     
-                    }else{
+                    }else if shuffle.playing{
+                    
+                        shuffle.stop()
                     }
-                
-                while shuffle.playing{
+            
+                /*
+                if shuffle.playing{
                     shuffle.stop()
                 }
-            
+                */
             case "pause":
                 
                 if reproductor.playing{
@@ -178,7 +179,7 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     
                 }
                 */
-            default: //este es shuffle
+            default: //este es el boton shuffle
                 
                 
                 let random: Int = Int (arc4random_uniform(6))//random
@@ -192,7 +193,6 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                     //si se presiona shuffle tanto play como shuffle obtienen el mismo valor del random
                     try shuffle = AVAudioPlayer(contentsOfURL: shuffleAudioUrl)
                     try reproductor = AVAudioPlayer(contentsOfURL: shuffleAudioUrl)
-                    
                     portada.image = UIImage(data: shufflaImgData!)
                     
                     //obtienen el mismo valor del random
@@ -202,11 +202,10 @@ class DetailsViewController: UIViewController,AVAudioPlayerDelegate {
                 }catch{
                     
                 }
-            
+                
                 
                 if !shuffle.playing{
 
-                    
                     shuffle.play()
                     
                 }else if shuffle.playing{
